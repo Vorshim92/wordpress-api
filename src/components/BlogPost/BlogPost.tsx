@@ -2,6 +2,7 @@ export interface Post {
   id: number;
   title: { rendered: string };
   content: { rendered: string };
+  _embedded: { "wp:featuredmedia": [{ source_url: string }] };
 }
 
 function Blogpost({ post }: { post: Post }) {
@@ -16,7 +17,7 @@ function Blogpost({ post }: { post: Post }) {
       </p>
       <h2 className="blog-title">{post.title.rendered}</h2>
       <p className="blog-excerpt" dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
-      <img src="" className="mask" />
+      <img src={post._embedded["wp:featuredmedia"][0].source_url} alt="" className="mask" />
     </div>
   );
 }

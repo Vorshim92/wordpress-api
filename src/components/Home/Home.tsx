@@ -9,7 +9,16 @@ function Home() {
 
   const fetchPosts = async () => {
     try {
-      const response = await fetch(`${baseApiUrl}/posts`);
+      const username = "admin";
+      const password = "atP0 Etwt yaNL XSVR UVFf Ng6w";
+      const token = btoa(`${username}:${password}`);
+      const headers = {
+        Authorization: `Basic ${token}`,
+      };
+
+      const response = await fetch(`${baseApiUrl}/posts?_embed`, {
+        headers: headers,
+      });
       if (!response.ok) {
         throw new Error("Failed to fetch posts");
       }
