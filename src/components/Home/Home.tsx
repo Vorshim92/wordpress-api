@@ -37,8 +37,8 @@ function Home() {
     <>
       {posts &&
         posts.map((post: Post) => (
-          <Col xs={2}>
-            <Blogpost post={post} key={post.id} />
+          <Col xs={2} key={post.id}>
+            <Blogpost post={post} />
           </Col>
         ))}
     </>
