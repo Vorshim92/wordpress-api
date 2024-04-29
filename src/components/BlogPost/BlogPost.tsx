@@ -1,7 +1,7 @@
-interface Post {
+export interface Post {
   id: number;
-  title: string;
-  content: string;
+  title: { rendered: string };
+  content: { rendered: string };
 }
 
 function Blogpost({ post }: { post: Post }) {
@@ -14,8 +14,8 @@ function Blogpost({ post }: { post: Post }) {
           year: "numeric",
         })}
       </p>
-      <h2 className="blog-title">TITOLO</h2>
-      <p className="blog-excerpt" dangerouslySetInnerHTML={{ __html: "post.excerpt.rendered" }} />
+      <h2 className="blog-title">{post.title.rendered}</h2>
+      <p className="blog-excerpt" dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
       <img src="" className="mask" />
     </div>
   );
