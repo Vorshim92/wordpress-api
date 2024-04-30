@@ -1,5 +1,7 @@
-import { baseApiUrl } from "../../app/endpoints";
 import { Button } from "react-bootstrap";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { deletePost } from "../../app/actions/deletePost";
+import { fetchPosts } from "../../app/actions/fetchPost";
 export interface Post {
   id: number;
   title: { rendered: string };
@@ -8,25 +10,11 @@ export interface Post {
 }
 
 function Blogpost({ post }: { post: Post }) {
-  const deletePost = async (id: number) => {
-    try {
-      const username = "admin";
-      const password = "atP0 Etwt yaNL XSVR UVFf Ng6w";
-      const token = btoa(`${username}:${password}`);
-      const headers = {
-        Authorization: `Basic ${token}`,
-      };
+  const dispatch = useAppDispatch();
 
-      const response = await fetch(`${baseApiUrl}/posts/${id}`, {
-        method: "DELETE",
-        headers: headers,
-      });
-      if (!response.ok) {
-        throw new Error("Failed to fetch posts");
-      }
-    } catch (error) {
-      console.error("Error fetching posts:", error);
-    }
+  const handleOnClick = async () => {
+    await deletePost(post.id);
+    dispatch(fetchPosts);
   };
 
   return (
@@ -41,8 +29,8 @@ function Blogpost({ post }: { post: Post }) {
 
       <h2 className="blog-title">{post.title.rendered}</h2>
       <p className="blog-excerpt" dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
-      <Button onClick={() => deletePost(post.id)}>DELETE</Button>
-      <img src={post._embedded["wp:featuredmedia"][0].source_url} alt="" className="mask" />
+      <Button onClick={handleOnClick}>DELETE</Button>
+      <img src={post._embedded["wp:featuredmedia"] ? post._embedded["wp:featuredmedia"][0].source_url : ""} alt="" className="mask" />
     </div>
   );
 }

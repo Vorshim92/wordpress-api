@@ -1,4 +1,5 @@
 import { Reducer } from "redux";
+
 export const FETCH_POST_SUCCESS = "FETCH_POST_SUCCESS";
 export const FETCH_POST_FAILURE = "FETCH_POST_FAILURE";
 
