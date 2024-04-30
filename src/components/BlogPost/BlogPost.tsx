@@ -1,7 +1,8 @@
 import { Button } from "react-bootstrap";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { useAppDispatch } from "../../app/hooks";
 import { deletePost } from "../../app/actions/deletePost";
 import { fetchPosts } from "../../app/actions/fetchPost";
+import { Link } from "react-router-dom";
 export interface Post {
   id: number;
   title: { rendered: string };
@@ -12,7 +13,7 @@ export interface Post {
 function Blogpost({ post }: { post: Post }) {
   const dispatch = useAppDispatch();
 
-  const handleOnClick = async () => {
+  const handleOnDelete = async () => {
     await deletePost(post.id);
     dispatch(fetchPosts);
   };
@@ -29,7 +30,12 @@ function Blogpost({ post }: { post: Post }) {
 
       <h2 className="blog-title">{post.title.rendered}</h2>
       <p className="blog-excerpt" dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
-      <Button onClick={handleOnClick}>DELETE</Button>
+      <Button className="btn-danger" onClick={handleOnDelete}>
+        DELETE
+      </Button>
+      <Link className="" to={`/post/${post.id}`}>
+        <Button className="btn-primary"> VISUALIZZA </Button>
+      </Link>
       <img src={post._embedded["wp:featuredmedia"] ? post._embedded["wp:featuredmedia"][0].source_url : ""} alt="" className="mask" />
     </div>
   );

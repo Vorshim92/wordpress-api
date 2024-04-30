@@ -1,22 +1,22 @@
 import { Reducer } from "redux";
 
-export const FETCH_POST_SUCCESS = "FETCH_POST_SUCCESS";
-export const FETCH_POST_FAILURE = "FETCH_POST_FAILURE";
+export const FETCH_POSTS_SUCCESS = "FETCH_POSTS_SUCCESS";
+export const FETCH_POSTS_FAILURE = "FETCH_POSTS_FAILURE";
 
 interface MyState {
   postsData: any[];
   loading: boolean;
   error: boolean;
 }
-interface FetchPostSuccessAction {
-  type: typeof FETCH_POST_SUCCESS;
+interface FetchPostsSuccessAction {
+  type: typeof FETCH_POSTS_SUCCESS;
   payload: any;
 }
 
-interface FetchPostFailureAction {
-  type: typeof FETCH_POST_FAILURE;
+interface FetchPostsFailureAction {
+  type: typeof FETCH_POSTS_FAILURE;
 }
-export type Action = FetchPostSuccessAction | FetchPostFailureAction;
+export type ActionPosts = FetchPostsSuccessAction | FetchPostsFailureAction;
 
 const initialState = {
   postsData: [],
@@ -24,16 +24,16 @@ const initialState = {
   error: false,
 };
 
-const postReducer: Reducer<MyState, Action> = (state = initialState, action) => {
+const postsReducer: Reducer<MyState, ActionPosts> = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_POST_SUCCESS:
+    case FETCH_POSTS_SUCCESS:
       return {
         ...state,
         postsData: action.payload,
         loading: false,
         error: false,
       };
-    case FETCH_POST_FAILURE:
+    case FETCH_POSTS_FAILURE:
       return {
         ...state,
         postsData: [],
@@ -45,4 +45,4 @@ const postReducer: Reducer<MyState, Action> = (state = initialState, action) => 
   }
 };
 
-export default postReducer;
+export default postsReducer;

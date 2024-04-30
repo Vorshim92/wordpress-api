@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Container, Row } from "react-bootstrap";
 import Navbar from "./components/NavBar/Navbar";
 import Home from "./components/Home/Home";
+import Viewpost from "./components/BlogPost/ViewPost";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Row>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/post/:postId" element={<Viewpost />} />
             </Routes>
           </Row>
         </Container>
