@@ -19,11 +19,11 @@ function Viewpost() {
   return (
     <>
       <Col>
-        <Card style={{ width: "18rem" }}>
+        <Card className="mt-5" style={{ width: "18rem" }}>
           <Card.Img variant="top" src={post._embedded["wp:featuredmedia"] ? post._embedded["wp:featuredmedia"][0].source_url : ""} />
           <Card.Body>
             <Card.Title>{post.title.rendered}</Card.Title>
-            <Card.Text>{post.content.rendered}</Card.Text>
+            <Card.Text dangerouslySetInnerHTML={{ __html: post.content.rendered }}></Card.Text>
             <Button variant="primary">MODIFICA</Button>
           </Card.Body>
         </Card>
