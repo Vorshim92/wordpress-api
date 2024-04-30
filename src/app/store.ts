@@ -1,8 +1,11 @@
-import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import { combineReducers, configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import postReducer from "./reducers/postsReducer";
 
-export const store = configureStore({
-  reducer: {},
+const rootReducer = combineReducers({
+  posts: postReducer,
 });
+
+export const store = configureStore({ reducer: rootReducer });
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
