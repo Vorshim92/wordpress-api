@@ -19,7 +19,7 @@ interface FetchPostFailureAction {
 export type ActionPost = FetchPostSuccessAction | FetchPostFailureAction;
 
 const initialState = {
-  postData: [],
+  postData: null,
   loading: true,
   error: false,
 };

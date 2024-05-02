@@ -52,7 +52,7 @@ export const fetchPost = (postId: string) => async (dispatch: (action: ActionPos
       Authorization: `Basic ${token}`,
     };
 
-    const response = await fetch(`${baseApiUrl}/posts/${postId}?_embed`, {
+    const response = await fetch(`${baseApiUrl}/posts/${postId}?_embed=1`, {
       headers: headers,
     });
     if (response.ok) {
